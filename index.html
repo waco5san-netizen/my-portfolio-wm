@@ -1143,7 +1143,11 @@
             <p>オンライン秘書やパーソナルトレーニングについてのご相談を受け付けています。<br>具体的な依頼内容が決まっていない場合でも、「どのようなことをお願いできるか知りたい」という段階から、お気軽にお問い合わせください。</p>
         </div>
 
-        <form class="contact-form fade-in" id="contactForm" onsubmit="handleFormSubmit(event)">
+        <form
+            class="contact-form fade-in"
+            id="contactForm"
+            action="https://formspree.io/f/xvzedqer"
+            method="POST">
             <!-- 
               【フォームの接続】
               実際にメールを送信する場合は、formの action 属性に送信先URL（Formspree, Getform, 独自のPHPなど）を設定し、method="POST" を追加してください。
@@ -1307,16 +1311,6 @@
         // 5. Form Submission Handling (with Modal instead of alert)
         const modal = document.getElementById('successModal');
         const contactForm = document.getElementById('contactForm');
-
-        function handleFormSubmit(event) {
-            event.preventDefault(); // デフォルトの送信をキャンセル
-            
-            // ここに実際の送信処理（API呼び出しなど）を追加できます。
-            // 今回は疑似的に成功したとみなしてモーダルを表示します。
-            
-            modal.classList.add('active');
-            contactForm.reset(); // フォームをクリア
-        }
 
         function closeModal() {
             modal.classList.remove('active');
