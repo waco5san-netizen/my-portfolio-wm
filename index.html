@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WACHI MAKO｜オンライン秘書 × パーソナルトレーナー</title>
+    <meta name="description" content="オンライン秘書とパーソナルトレーナーの両面から、社長の仕事・身体・心を整え、本来やるべき経営に集中できる環境をサポートします。">
+    
+    <!-- OGP Settings -->
+    <meta property="og:title" content="WACHI MAKO｜オンライン秘書 × パーソナルトレーナー">
+    <meta property="og:description" content="オンライン秘書とパーソナルトレーナーの両面から、社長の仕事・身体・心を整え、本来やるべき経営に集中できる環境をサポートします。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://example.com/">
+    <meta property="og:image" content="https://placehold.co/1200x630/E8E3DD/666666?text=WACHI+MAKO+OGP">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           CSS Variables & Reset
+           ========================================================================== */
+        :root {
+            /* Colors */
+            --bg-main: #F8F6F2;
+            --bg-sub: #FFFFFF;
+            --text-main: #222222;
+            --text-sub: #666666;
+            --accent: #B59B7C;
+            --accent-hover: #9c8466;
+            --support: #D9D0C5;
+            --border: #E8E3DD;
+            
+            /* Fonts */
+            --font-en: 'Cormorant Garamond', serif;
+            --font-ja: 'Zen Kaku Gothic New', sans-serif;
+            
+            /* Layout */
+            --header-height: 80px;
+            --content-width: 1080px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-ja);
+            color: var(--text-main);
+            background-color: var(--bg-main);
+            line-height: 1.8;
+            letter-spacing: 0.05em;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* ==========================================================================
+           Typography & Common
+           ========================================================================== */
+        .en-title {
+            font-family: var(--font-en);
+            font-size: 2.5rem;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .ja-title {
+            font-size: 1.75rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .en-title { font-size: 2rem; }
+            .ja-title { font-size: 1.4rem; margin-bottom: 2rem; }
+        }
+
+        .section-container {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            padding: 8rem 5%;
+        }
+
+        @media (max-width: 768px) {
+            .section-container { padding: 5rem 5%; }
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 3rem;
+            border: 1px solid var(--accent);
+            background-color: transparent;
+            color: var(--accent);
+            font-size: 0.95rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: var(--accent);
+            color: var(--bg-sub);
+        }
+
+        .btn-solid {
+            background-color: var(--accent);
+            color: var(--bg-sub);
+        }
+
+        .btn-solid:hover {
+            background-color: transparent;
+            color: var(--accent);
+        }
+
+        /* Fade-in Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==========================================================================
+           Header & Navigation
+           ========================================================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            z-index: 1000;
+            transition: background-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: var(--font-en);
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: var(--text-main);
+            z-index: 1001; /* Above mobile menu */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links li a {
+            font-family: var(--font-en);
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            color: var(--text-main);
+            position: relative;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 1px;
+            background-color: var(--text-main);
+            margin: 6px 0;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 900px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background-color: var(--bg-main);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.5s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+        }
+
+        /* ==========================================================================
+           Hero Section
+           ========================================================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: var(--header-height);
+            position: relative;
+        }
+
+        .hero-inner {
+            max-width: var(--content-width);
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .hero-text {
+            flex: 1;
+            z-index: 2;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-en);
+            font-size: 0.9rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .hero-title {
+            font-size: 2.8rem;
+            line-height: 1.4;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            color: var(--text-sub);
+            margin-bottom: 3rem;
+            line-height: 2;
+        }
+
+        .hero-profile {
+            margin-bottom: 3rem;
+        }
+
+        .hero-job {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            margin-bottom: 0.2rem;
+        }
+
+        .hero-name {
+            font-family: var(--font-en);
+            font-size: 1.8rem;
+            letter-spacing: 0.1em;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 20px 20px 0 var(--support);
+        }
+
+        @media (max-width: 900px) {
+            .hero-inner {
+                flex-direction: column-reverse;
+                justify-content: center;
+                padding-top: 2rem;
+                padding-bottom: 4rem;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-btns {
+                flex-direction: column;
+            }
+            .hero-image {
+                width: 90%;
+                margin: 0 auto;
+            }
+        }
+
+        /* ==========================================================================
+           About Section
+           ========================================================================== */
+        .about {
+            background-color: var(--bg-sub);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center; /* flex-startからcenterに変更して上下中央揃えに */
+            gap: 5rem;
+        }
+
+        .about-image {
+            flex: 1;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-sub);
+        }
+
+        .about-mission {
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: var(--bg-main);
+            border-left: 2px solid var(--accent);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 900px) {
+            .about-content {
+                flex-direction: column;
+                gap: 3rem;
+            }
+        }
+
+        /* ==========================================================================
+           Story Section
+           ========================================================================== */
+        .story {
+            position: relative;
+        }
+
+        .story-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .story-text {
+            text-align: left;
+            margin-bottom: 4rem;
+        }
+
+        .story-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-sub);
+        }
+
+        .story-highlight {
+            font-size: 1.5rem;
+            line-height: 2;
+            color: var(--text-main);
+            margin: 4rem 0;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .story-highlight span {
+            display: block;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .story-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .story-highlight { font-size: 1.2rem; }
+            .story-image { height: 250px; }
+        }
+
+        /* ==========================================================================
+           Service Section
+           ========================================================================== */
+        .service {
+            background-color: var(--bg-sub);
+        }
+
+        .service-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 6rem;
+        }
+
+        .service-card {
+            display: flex;
+            align-items: stretch;
+            gap: 4rem;
+        }
+
+        .service-card:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .service-image {
+            flex: 1;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 400px;
+        }
+
+        .service-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            font-weight: 500;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .service-desc {
+            margin-bottom: 2rem;
+        }
+
+        .service-list {
+            margin-bottom: 2rem;
+        }
+
+        .service-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-sub);
+            font-size: 0.95rem;
+        }
+
+        .service-list li::before {
+            content: '・';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .service-list li.note::before {
+            content: '※';
+        }
+
+        .service-feature {
+            padding: 1.5rem;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--accent);
+            background-color: transparent;
+            position: relative;
+            line-height: 1.8;
+        }
+
+        .service-feature strong {
+            position: absolute;
+            top: -0.8rem;
+            left: 1.2rem;
+            background-color: var(--bg-sub);
+            padding: 0 0.8rem;
+            color: var(--accent);
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+
+        .service-catch {
+            font-size: 1.2rem;
+            font-weight: 500;
+            text-align: center;
+            color: var(--accent);
+            margin-top: auto;
+        }
+
+        @media (max-width: 900px) {
+            .service-cards { gap: 4rem; }
+            .service-card, .service-card:nth-child(even) {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .service-image img { min-height: 250px; }
+        }
+
+        /* ==========================================================================
+           Career Section
+           ========================================================================== */
+        .career-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .career-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 1px;
+            background-color: var(--border);
+        }
+
+        .career-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .career-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .career-item::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 6px;
+            width: 9px;
+            height: 9px;
+            background-color: var(--bg-main);
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+        }
+
+        .career-year {
+            font-family: var(--font-en);
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .career-company {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .career-role {
+            font-size: 1rem;
+            color: var(--text-sub);
+            margin-bottom: 1rem;
+        }
+
+        .career-tasks {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            background-color: var(--bg-sub);
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .career-summary {
+            max-width: 800px;
+            margin: 4rem auto 0;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 2;
+            padding: 2rem;
+            background-color: var(--bg-sub);
+        }
+
+        /* ==========================================================================
+           Strength Section
+           ========================================================================== */
+        .strength {
+            background-color: var(--bg-sub);
+        }
+
+        .strength-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .strength-card {
+            background-color: var(--bg-main);
+            padding: 3rem 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .strength-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .strength-num {
+            font-family: var(--font-en);
+            font-size: 2.5rem;
+            color: var(--support);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .strength-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .strength-desc {
+            font-size: 0.95rem;
+            color: var(--text-sub);
+        }
+
+        @media (max-width: 768px) {
+            .strength-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ==========================================================================
+           Contact Section & Form
+           ========================================================================== */
+        .contact {
+            background-color: var(--bg-main);
+            text-align: center;
+        }
+
+        .contact-intro {
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            text-align: left;
+        }
+
+        .contact-intro p {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-examples {
+            background-color: var(--bg-sub);
+            padding: 2rem;
+            border: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+        
+        .contact-examples p { margin-bottom: 0.5rem;}
+        
+        .contact-examples ul {
+            padding-left: 1.5rem;
+            color: var(--text-sub);
+        }
+        .contact-examples ul li {
+            list-style-type: disc;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: left;
+            background-color: var(--bg-sub);
+            padding: 4rem 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .form-label span {
+            color: #d9534f;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            background-color: var(--bg-main);
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--text-main);
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .submit-btn-wrapper {
+            text-align: center;
+        }
+
+        .submit-btn {
+            width: 100%;
+            max-width: 300px;
+            padding: 1.2rem;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-form { padding: 2rem 1.5rem; }
+        }
+
+        /* ==========================================================================
+           Footer
+           ========================================================================== */
+        footer {
+            background-color: var(--bg-sub);
+            padding: 4rem 5% 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-logo {
+            font-family: var(--font-en);
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-job {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            margin-bottom: 2rem;
+        }
+
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-nav a {
+            font-family: var(--font-en);
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            color: var(--support);
+            font-family: var(--font-en);
+            letter-spacing: 0.05em;
+        }
+
+        /* Message Modal (Instead of alert) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: var(--bg-sub);
+            padding: 3rem;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-content h3 {
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        .modal-content p {
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="header">
+        <a href="#" class="logo">WACHI MAKO</a>
+        <nav>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#story" class="nav-link">Story</a></li>
+                <li><a href="#service" class="nav-link">Service</a></li>
+                <li><a href="#career" class="nav-link">Career</a></li>
+                <li><a href="#strength" class="nav-link">Strength</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-inner fade-in">
+            <div class="hero-text">
+                <span class="hero-subtitle">ONLINE SECRETARY × PERSONAL TRAINER</span>
+                <h1 class="hero-title">社長が最高の状態で<br>経営できる毎日をつくる。</h1>
+                <p class="hero-desc">仕事・身体・心を整え、<br>経営者が本来やるべき経営に集中できる環境をサポートします。</p>
+                <div class="hero-profile">
+                    <div class="hero-job">オンライン秘書 × パーソナルトレーナー</div>
+                    <div class="hero-name">WACHI MAKO</div>
+                </div>
+                <div class="hero-btns">
+                    <a href="#about" class="btn">私について</a>
+                    <a href="#contact" class="btn btn-solid">お問い合わせ</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <!-- 
+                  【写真差し替え】 
+                  以下の src のURLを、実際の写真のパスに変更しました。
+                -->
+                <img src="24K_0140_4.jpg" alt="WACHI MAKO - オンライン秘書 × パーソナルトレーナー">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about section-container" id="about">
+        <h2 class="en-title fade-in">ABOUT</h2>
+        <h3 class="ja-title fade-in">はじめまして、WACHI MAKOです。</h3>
+        
+        <div class="about-content fade-in">
+            <div class="about-image">
+                <!-- 
+                  【写真差し替え】 
+                  プロフィール写真（例: "images/profile.jpg"）
+                -->
+                <img src="https://placehold.co/800x1000/E8E3DD/666666?text=Profile+Photo" alt="WACHI MAKO プロフィール写真">
+            </div>
+            <div class="about-text">
+                <p>営業・法人営業・ディレクション・カスタマーサポート・イベント運営など、約12年間、企業の成長を支える仕事に携わってきました。</p>
+                <p>私が仕事で何より大切にしているのは、相手との信頼関係を築くことです。「何をするか」と同じくらい、「誰と仕事をするか」を大切にしながら、人と向き合ってきました。</p>
+                <p>現在はこれまでの経験を活かして、オンライン秘書として経営を支えながら、パーソナルトレーナーとして健康づくりのサポートしています。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story section-container" id="story">
+        <div class="story-content">
+            <h2 class="en-title fade-in">MY STORY</h2>
+            <h3 class="ja-title fade-in">仕事のパフォーマンスは、健康という土台から。</h3>
+            
+            <div class="story-text fade-in">
+                <p>私自身、体調を崩した経験があります。その経験をきっかけに、どれだけ仕事が好きでも、健康でなければ本来の力を発揮できないことを実感しました。</p>
+                <p>一方で、日々の業務に追われ、目の前の仕事でいっぱいになっている人たちを見てきました。本来やるべきことに集中できず、運動が後回しになり、仕事のパフォーマンスまで落ちてしまう。</p>
+                <p>そんな人たちに対して、自分にできることは何だろうと考えました。</p>
+                <p>たどり着いたのが、オンライン秘書とパーソナルトレーナー、両方の立場からサポートすることでした。仕事を整えるだけでもなく、身体を整えるだけでもない。仕事と身体、その両方を支えることで、社長が本来やるべき経営に集中できる環境をつくりたいと考えています。</p>
+            </div>
+            
+            <div class="story-highlight fade-in">
+                <span>仕事を整える。</span>
+                <span>身体を整える。</span>
+                <span>心を整える。</span>
+                社長が最高の状態で経営できる毎日を、すぐそばで支えます。
+            </div>
+        </div>
+        
+        <!-- 
+          【写真差し替え】 
+          トレーニング風景や朝の自然光を感じる写真（例: "images/story.jpg"）
+        -->
+        <img src="https://placehold.co/1200x600/E8E3DD/666666?text=Story+Image%0A(Natural+Light)" alt="自然光の中でのイメージ" class="story-image fade-in">
+    </section>
+
+    <!-- Service Section -->
+    <section class="service section-container" id="service">
+        <h2 class="en-title fade-in">SERVICE</h2>
+        <h3 class="ja-title fade-in">仕事と身体、両方から経営を支えます。</h3>
+        
+        <div class="service-cards">
+            <!-- Service 1: Secretary -->
+            <div class="service-card fade-in">
+                <div class="service-image">
+                    <!-- 【写真差し替え】 オンライン秘書のイメージ画像 -->
+                    <img src="https://placehold.co/800x600/E8E3DD/666666?text=Online+Secretary" alt="オンライン秘書サービス">
+                </div>
+                <div class="service-details">
+                    <h4 class="service-title">オンライン秘書</h4>
+                    <p class="service-desc">社長が本来やるべき経営に集中できるよう、日々の業務やコミュニケーションをサポートします。</p>
+                    
+                    <ul class="service-list">
+                        <li>スケジュール管理 / タスク管理 / メール対応</li>
+                        <li>採用サポート（求人作成・応募者対応・面接対応・調整）</li>
+                        <li>社外とのコミュニケーション（取引先・顧客連絡）</li>
+                        <li>資料作成 / プロジェクト進行管理　など</li>
+                    </ul>
+                    
+                    <div class="service-feature">
+                        <strong>特徴</strong>
+                        単なる事務代行ではなく、人とのコミュニケーションが必要な業務まで対応します。
+                    </div>
+                    
+                    <div class="service-catch">
+                        社長にしかできない仕事に、<br>集中できる時間をつくります。
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 2: Personal Trainer -->
+            <div class="service-card fade-in">
+                <div class="service-image">
+                    <!-- 【写真差し替え】 パーソナルトレーニングのイメージ画像 -->
+                    <img src="https://placehold.co/800x600/E8E3DD/666666?text=Personal+Trainer" alt="パーソナルトレーニングサービス">
+                </div>
+                <div class="service-details">
+                    <h4 class="service-title">パーソナルトレーニング</h4>
+                    <p class="service-desc">最高のコンディションで仕事ができる身体づくりをサポートします。</p>
+                    
+                    <ul class="service-list">
+                        <li>週1回の出張型パーソナルトレーニング</li>
+                        <li class="note">ご自宅 orご自宅近くのレンタルジムでのトレーニング</li>
+                        <li class="note">一人ひとりに合わせたトレーニングメニュー</li>
+                        <li>運動習慣づくり / 食事アドバイス</li>
+                        <li class="note">日常生活に取り入れられる健康習慣の提案</li>
+                    </ul>
+                    
+                    <div class="service-feature">
+                        <strong>特徴</strong>
+                        忙しい経営者が無理なく続けられるように、ご自宅orご自宅近くまで訪問します。身体を鍛えることだけではなく、仕事の集中力や生産性を支える運動習慣づくりを大切にします。
+                    </div>
+                    
+                    <div class="service-catch">
+                        鍛えることが目的ではなく、<br>最高の状態で仕事ができる身体をつくります。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Section -->
+    <section class="career section-container" id="career">
+        <h2 class="en-title fade-in" style="text-align: center;">CAREER</h2>
+        <h3 class="ja-title fade-in" style="text-align: center;">これまでの経験</h3>
+        
+        <div class="career-timeline">
+            
+            <div class="career-item fade-in">
+                <div class="career-year">2024 - Present</div>
+                <div class="career-company">SHE株式会社</div>
+                <div class="career-role">SHElikes ／ PROデザイナー</div>
+                <div class="career-tasks">
+                    キャリアカウンセリング / オンラインセールス / 受講生サポート /コミュニティ運営 / イベント企画・運営 / 入学式・卒業式の運営
+                </div>
+            </div>
+
+            <div class="career-item fade-in">
+                <div class="career-year">2023 - 2025</div>
+                <div class="career-company">パーソルキャリア株式会社</div>
+                <div class="career-role">求人広告制作ディレクター</div>
+                <div class="career-tasks">
+                    求人広告のライティング / 取材・ヒアリング / プロジェクト進行管理 / デザイン構成の企画 / 撮影ディレクション / サブプロジェクトマネージャー
+                </div>
+            </div>
+
+            <div class="career-item fade-in">
+                <div class="career-year">2022 - 2023</div>
+                <div class="career-company">パーソルキャリア株式会社</div>
+                <div class="career-role">法人営業・リクルーティングアドバイザー</div>
+                <div class="career-tasks">
+                    法人採用支援 / 求人ヒアリング / 求人票作成 / 候補者の進捗管理 / 面接日程調整 / 人材紹介、研修、求人媒体などの提案
+                </div>
+            </div>
+
+            <div class="career-item fade-in">
+                <div class="career-year">2015 - 2022</div>
+                <div class="career-company">フジサキテキスタイル株式会社</div>
+                <div class="career-role">アパレル繊維・生地の法人営業</div>
+                <div class="career-tasks">
+                    アパレル企業への生地提案 / 受発注管理 / 在庫・納期管理 / 商品企画 / 顧客との別注企画 / 数字管理 / 新人育成2名
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Strength Section -->
+    <section class="strength section-container" id="strength">
+        <h2 class="en-title fade-in" style="text-align: center;">STRENGTH</h2>
+        <h3 class="ja-title fade-in" style="text-align: center;">私がお仕事で大切にしていること</h3>
+        
+        <div class="strength-grid">
+            <div class="strength-card fade-in">
+                <div class="strength-num">01</div>
+                <h4 class="strength-title">相手に寄り添うヒアリング</h4>
+                <p class="strength-desc">営業・キャリア支援・採用支援を通じて培った傾聴力を活かし、相手の考えや本質的な課題を丁寧に整理します。</p>
+            </div>
+            
+            <div class="strength-card fade-in">
+                <div class="strength-num">02</div>
+                <h4 class="strength-title">プロジェクト推進力</h4>
+                <p class="strength-desc">進行管理、ディレクション、イベント運営などの経験を活かし、必要な業務を整理して着実に前へ進めます。</p>
+            </div>
+            
+            <div class="strength-card fade-in">
+                <div class="strength-num">03</div>
+                <h4 class="strength-title">信頼を築くコミュニケーション</h4>
+                <p class="strength-desc">社内外を問わず、相手の立場を考えた丁寧なコミュニケーションを大切にしています。一時的な関係ではなく、長く信頼し合える関係を築くことを目指します。</p>
+            </div>
+            
+            <div class="strength-card fade-in">
+                <div class="strength-num">04</div>
+                <h4 class="strength-title">健康を土台にしたサポート</h4>
+                <p class="strength-desc">仕事だけではなく、身体や生活習慣も含めて整えることで、最高のコンディションづくりをサポートします。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact section-container" id="contact">
+        <h2 class="en-title fade-in">CONTACT</h2>
+        
+        <div class="contact-intro fade-in">
+            <p>オンライン秘書やパーソナルトレーニングについてのご相談を受け付けています。<br>具体的な依頼内容が決まっていない場合でも、「どのようなことをお願いできるか知りたい」という段階から、お気軽にお問い合わせください。</p>
+        </div>
+
+        <form class="contact-form fade-in" id="contactForm" onsubmit="handleFormSubmit(event)">
+            <!-- 
+              【フォームの接続】
+              実際にメールを送信する場合は、formの action 属性に送信先URL（Formspree, Getform, 独自のPHPなど）を設定し、method="POST" を追加してください。
+              現在はJavaScriptで擬似的に送信完了メッセージを表示する設定になっています。
+            -->
+            
+            <div class="form-group">
+                <label for="name" class="form-label">お名前 <span>必須</span></label>
+                <input type="text" id="name" name="name" class="form-control" required placeholder="山田 太郎">
+            </div>
+            
+            <div class="form-group">
+                <label for="company" class="form-label">会社名</label>
+                <input type="text" id="company" name="company" class="form-control" placeholder="株式会社〇〇">
+            </div>
+            
+            <div class="form-group">
+                <label for="email" class="form-label">メールアドレス <span>必須</span></label>
+                <input type="email" id="email" name="email" class="form-control" required placeholder="mail@example.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="category" class="form-label">ご相談内容</label>
+                <select id="category" name="category" class="form-control">
+                    <option value="オンライン秘書">オンライン秘書について</option>
+                    <option value="パーソナルトレーニング">パーソナルトレーニングについて</option>
+                    <option value="両方のサービス">両方のサービスについて</option>
+                    <option value="その他">その他・まずは話をしてみたい</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="message" class="form-label">お問い合わせ本文 <span>必須</span></label>
+                <textarea id="message" name="message" class="form-control" required placeholder="ご相談内容や現状のお悩みなど、自由にご記入ください。"></textarea>
+            </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="privacy" name="privacy" required>
+                <label for="privacy">個人情報保護方針に同意する</label>
+            </div>
+            
+            <div class="submit-btn-wrapper">
+                <button type="submit" class="btn btn-solid submit-btn">相談してみる</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">WACHI MAKO</div>
+        <div class="footer-job">オンライン秘書 × パーソナルトレーナー</div>
+        
+        <div class="footer-nav">
+            <a href="#about">About</a>
+            <a href="#story">Story</a>
+            <a href="#service">Service</a>
+            <a href="#career">Career</a>
+            <a href="#strength">Strength</a>
+            <a href="#contact">Contact</a>
+        </div>
+        
+        <p class="copyright">Copyright &copy; 2026 WACHI MAKO. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Custom Modal for Form Submission Success (Replaces alert) -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-content">
+            <h3>送信完了</h3>
+            <p>お問い合わせありがとうございます。<br>内容を確認のうえ、折り返しご連絡いたします。</p>
+            <button class="btn btn-solid" onclick="closeModal()">閉じる</button>
+        </div>
+    </div>
+
+    <script>
+        /* ==========================================================================
+           JavaScript functionality
+           ========================================================================== */
+
+        // 1. Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 2. Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        const navItems = document.querySelectorAll('.nav-link');
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            
+            // 背景スクロール防止
+            if (navLinks.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+
+        // メニューのリンクをクリックしたら閉じる
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // 3. Smooth Scrolling (for all internal links)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const headerHeight = header.offsetHeight;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+  
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+
+        // 4. Fade-in Animation on Scroll using Intersection Observer
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeOptions = {
+            root: null,
+            rootMargin: '0px 0px -100px 0px', // 要素が画面の下から100px入ったら発火
+            threshold: 0.1
+        };
+
+        const fadeObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // 一度表示されたら監視を解除する場合（繰り返しアニメーションさせない場合）
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, fadeOptions);
+
+        fadeElements.forEach(element => {
+            fadeObserver.observe(element);
+        });
+
+        // 5. Form Submission Handling (with Modal instead of alert)
+        const modal = document.getElementById('successModal');
+        const contactForm = document.getElementById('contactForm');
+
+        function handleFormSubmit(event) {
+            event.preventDefault(); // デフォルトの送信をキャンセル
+            
+            // ここに実際の送信処理（API呼び出しなど）を追加できます。
+            // 今回は疑似的に成功したとみなしてモーダルを表示します。
+            
+            modal.classList.add('active');
+            contactForm.reset(); // フォームをクリア
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+        
+        // モーダルの外側をクリックしても閉じる
+        modal.addEventListener('click', (e) => {
+            if(e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
